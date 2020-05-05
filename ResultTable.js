@@ -16,8 +16,10 @@ import result from "./result.js";
  * TPBS
  * ZPCD
  */
-const categories = new Set();
-result.forEach(({TPBS}) => categories.add(TPBS));
+const CATEGORIES = new Set();
+result.forEach(({TPBS}) => CATEGORIES.add(TPBS));
+
+const SEARCH_BASE = "https://map.naver.com/v5/search/";
 
 export default class ResultTable extends Component {
   constructor() {
@@ -73,7 +75,7 @@ export default class ResultTable extends Component {
                 <br />
                 <select onChange="${this.handleChange}">
                   <option selected>-- 분류 --</option>
-                  ${[...categories.entries()]
+                  ${[...CATEGORIES.entries()]
                     .sort()
                     .map(
                       ([category]) =>
@@ -106,12 +108,16 @@ export default class ResultTable extends Component {
               ({ADDR, MEST_NM, TPBS}) => html`
                 <tr>
                   <td>${TPBS}</td>
-                  <td>${MEST_NM}</td>
                   <td>
                     <a
-                      href="https://map.naver.com/v5/search/${encodeURIComponent(
-                        ADDR
-                      )}"
+                      href="${SEARCH_BASE}${encodeURIComponent(MEST_NM)}"
+                      target="_blank"
+                      >${MEST_NM}</a
+                    >
+                  </td>
+                  <td>
+                    <a
+                      href="${SEARCH_BASE}${encodeURIComponent(ADDR)}"
                       target="_blank"
                       >${ADDR}</a
                     >
