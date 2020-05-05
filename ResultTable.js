@@ -19,7 +19,7 @@ import result from "./result.js";
 const CATEGORIES = new Set();
 result.forEach(({TPBS}) => CATEGORIES.add(TPBS));
 
-const SEARCH_BASE = "https://map.naver.com/v5/search/";
+const SEARCH_BASE = "https://m.map.naver.com/search2/search.nhn?query=";
 
 export default class ResultTable extends Component {
   constructor() {
